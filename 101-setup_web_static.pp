@@ -18,9 +18,9 @@ exec {'folders':
 }
 
 # create an html file with fake content to test configuration
-exec {'index':
-  provider => shell,
-  command  => 'echo -e "<html>\\n\\t<head>\\n\\t</head>\\n\\t<body>\\n\\t\\t<h1>Hello ALX</h1>\\n\\t</body>\\n</html>" > /data/web_static/releases/test/index.html',
+exec {'test':
+  command => '/bin/echo -e "<html>\n\t<head>\n\t</head>\n\t<body>\n\t\t<h1>Hello ALX</h1>\n\t</body>\n</html>" > /data/web_static/releases/test/index.html',
+  path    => '/bin',
 }
 
 # remove the symbolic link if exist and recreate it
@@ -42,9 +42,10 @@ service {'nginx':
 }
 
 # update the nginx config the content of /data/web_static/current/ to hbnb_static
-exec {'update-config':
-  provider => shell,
-  command  =>'sed -i "s/^\\s*location \\/ {/\\tlocation \\/hbnb_static {\\n\\t\\talias \\/data\\/web_static\\/current\\/;\\n\\t}\\n\\n&/" /etc/nginx/sites-enabled/default',
+exec {'configure':
+  command => "/bin/sed -i 's/^\\s*location \\\/ {/\\tlocation \\\/hbnb_static {\\n\\t\\talias \\\/data\\/web_static\\/current\\/;\\n\\t}\\n\\n&/' /etc/nginx/sites-enabled/default",
+  path    => '/bin',
+  unless  => "/bin/grep -q '^\\s*location \\\/hbnb_static {' /etc/nginx/sites-enabled/default",
 }
 
 # restart the server
