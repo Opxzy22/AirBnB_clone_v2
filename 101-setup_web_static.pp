@@ -12,14 +12,9 @@ package {'nginx':
 }
 
 # create folders if they don't exist exits
-file {'test':
-  ensure => directory,
-  path   => '/data/web_static/releases/test/',
-}
-
-file {'shared':
-  ensure => directory,
-  path   => '/data/web_static/shared/',
+exec {'folders':
+  provider => shell,
+  command  => 'mkdir -p /data/web_static/releases/test/ /data/web_static/shared/',
 }
 
 # create an html file with fake content to test configuration
@@ -40,7 +35,7 @@ exec {'ownership':
   command  => 'chown -R ubuntu:ubuntu /data/',
 }
 
-service { 'nginx':
+service {'nginx':
   ensure  => 'running',
   enable  => true,
   require => Package['nginx'],
