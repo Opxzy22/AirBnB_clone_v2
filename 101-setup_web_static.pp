@@ -29,15 +29,9 @@ exec {'index':
 }
 
 # remove the symbolic link if exist and recreate it
-file {'delete-link':
-  ensure => absent,
-  path   => '/data/web_static/current',
-}
-
-file {'create-link':
-  ensure => link,
-  path   => '/data/web_static/current',
-  target => '/data/web_static/releases/test/',
+exec {'update':
+  provider => shell,
+  command  => 'rm -rf /data/web_static/current; ln -s /data/web_static/releases/test/ /data/web_static/current',
 }
 
 # give ownership to the user and group ubuntu
@@ -55,7 +49,8 @@ service { 'nginx':
 # update the nginx config the content of /data/web_static/current/ to hbnb_static
 exec {'update-config':
   provider => shell,
-  command  =>'sed -i "s/^\\s*location \\/ {/\\tlocation \\/hbnb_static {\\n\\t\\talias \\/data\\/web_static\\/current\\/;\\n\\t}\\n\\n&/" /etc/nginx/sites-enabled/default'
+  command  =>'sed -i "s/^\\s*location \\/ {/\\tlocation \\/hbnb_static {\\n\\t\\talias \\/data\\/web_static\\/current\\/;\\n\\t}\\n\\n&/" /etc/nginx/sites-enabled/default',
+}
 
 # restart the server
 exec {'restart':
