@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" This script enerates a .tgz archive from the contents of web_satic folder """
+""" This script enerates a .tgz archive from the web_satic folder """
 from fabric.api import local
 from datetime import datetime
 

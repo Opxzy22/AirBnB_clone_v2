@@ -4,8 +4,10 @@ from fabric.api import local, put, run, env, runs_once
 from datetime import datetime
 from os.path import isfile
 
+
 env.hosts = ["100.25.30.148", "35.175.105.87"]
 env.user = "ubuntu"
+
 
 @runs_once
 def do_pack():
@@ -23,6 +25,7 @@ def do_pack():
     print("Successfully packed web_static to {}".format(archive_path))
 
     return archive_path
+
 
 def do_deploy(archive_path):
     """ Distributes an archive to webserver """
@@ -48,6 +51,7 @@ def do_deploy(archive_path):
 
     return True
 
+
 def deploy():
     """ Performs a full deployment from generating archive to deploying """
 
@@ -56,6 +60,7 @@ def deploy():
         return False
 
     return do_deploy(filename)
+
 
 @runs_once
 def clean_local(number=0):
@@ -80,10 +85,12 @@ def clean_local(number=0):
 
     local("rm {}".format(vers_to_del))
 
+
 def clean_server(number=0):
     """ performs cleanup actions on servers """
 
-    versions = run("ls /data/web_static/releases | grep web_static").stdout.split("\n")
+    versions = run("ls /data/web_static/releases | grep web_static")
+    versions = versions.stdout.split("\n")
 
     number = int(number)
     if number == 0:
@@ -101,6 +108,7 @@ def clean_server(number=0):
 
     vers_to_del = " ".join(vers_to_del)
     run("sudo rm -rf {}".format(vers_to_del))
+
 
 def do_clean(number=0):
     """ Performs cleanup actions, remove outdated versions, etc """

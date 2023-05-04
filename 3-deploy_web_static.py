@@ -4,8 +4,10 @@ from fabric.api import local, put, run, env, runs_once
 from datetime import datetime
 from os.path import isfile
 
+
 env.hosts = ["100.25.30.148", "35.175.105.87"]
 env.user = "ubuntu"
+
 
 @runs_once
 def do_pack():
@@ -18,11 +20,14 @@ def do_pack():
     print("Packing web_static to {}".format(archive_path))
 
     local("mkdir -p versions")
-    local("tar -cvzf {} web_static".format(archive_path))
+    result = local("tar -cvzf {} web_static".format(archive_path))
+    if result.failed:
+        return None
 
     print("Successfully packed web_static to {}".format(archive_path))
 
     return archive_path
+
 
 def do_deploy(archive_path):
     """ Distributes an archive to webserver """
@@ -38,7 +43,11 @@ def do_deploy(archive_path):
 
     put(archive_path, "/tmp/")
     run("mkdir -p {}".format(dir_path))
-    run("tar -xzf /tmp/{} -C {}".format(archive_name, dir_path))
+    result = run("tar -xzf /tmp/{} -C {}".format(archive_name, dir_path))
+
+    if result.failed:
+        return False
+
     run("cp -r {}/web_static/* {}".format(dir_path, dir_path))
     run("rm -rf /tmp/{} {}/web_static".format(archive_name, dir_path))
     run("rm -rf /data/web_static/current")
@@ -47,6 +56,7 @@ def do_deploy(archive_path):
     print("New version deployed!")
 
     return True
+
 
 def deploy():
     """ Performs a full deployment from generating archive to deploying """

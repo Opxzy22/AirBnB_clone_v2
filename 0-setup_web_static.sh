@@ -20,3 +20,6 @@ chown -R ubuntu:ubuntu /data/
 
 # update the nginx config the content of /data/web_static/current/ to hbnb_static
 sed -i "s/^\s*location \/ {/\tlocation \/hbnb_static {\n\t\talias \/data\/web_static\/current\/;\n\t}\n\n&/" /etc/nginx/sites-enabled/default
+
+# restart the server
+service nginx restart
