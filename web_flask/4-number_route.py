@@ -24,7 +24,7 @@ def hbnb():
 def c_text(text):
     """ c route configuration """
 
-    return f"C {text.replace('_', ' ')}"
+    return "C {}".format(text.replace("_", " "))
 
 
 @app.route("/python", strict_slashes=False)
@@ -32,14 +32,14 @@ def c_text(text):
 def python_text(text="is_cool"):
     """ python route configuration """
 
-    return f"Python {text.replace('_', ' ')}"
+    return "Python {}".format(text.replace("_", " "))
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
     """ number route configuration """
 
-    return f"{n} is a number"
+    return "{} is a number".format(n)
 
 
 if __name__ == "__main__":

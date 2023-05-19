@@ -24,7 +24,7 @@ def hbnb():
 def c_text(text):
     """ c route configuration """
 
-    return f"C {text.replace('_', ' ')}"
+    return "C {}".format(text.replace("_", " "))
 
 
 @app.route("/python", strict_slashes=False)
