@@ -27,9 +27,10 @@ class State(BaseModel, Base):
         @property
         def cities(self):
             """ returns all cities with state_id == State.id """
+            from models import storage
 
             list_cities = []
-            for key, obj in models.storage.all().items():
+            for key, obj in storage.all().items():
                 if "City" in key:
                     if obj.state_id == self.id:
                         list_cities += [obj]

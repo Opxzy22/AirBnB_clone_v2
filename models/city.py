@@ -26,6 +26,7 @@ class City(BaseModel, Base):
                 "Place",
                 backref="cities",
                 cascade="all, delete, delete-orphan")
+
     else:
         name = ""
         state_id = ""
