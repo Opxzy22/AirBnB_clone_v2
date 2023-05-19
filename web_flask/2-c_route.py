@@ -6,7 +6,7 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route("/", strict_slashes = False)
+@app.route("/", strict_slashes=False)
 def hello_hbnb():
     """ home route configuration """
 
@@ -24,7 +24,7 @@ def hbnb():
 def c_text(text):
     """ c route configuration """
 
-    return f"C {text.replace('_', ' ')}"
+    return "C {}".format(text.replace("_", " "))
 
 
 if __name__ == "__main__":
