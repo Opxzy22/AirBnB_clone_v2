@@ -12,22 +12,28 @@ from sqlalchemy.orm import relationship
 class State(BaseModel, Base):
     """ State class """
 
-    __tablename__ = "states"
-    name = Column(String(128), nullable=False)
-    cities = relationship(
-            "City",
-            backref="state",
-            cascade="all, delete")
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        from models.city import City
 
-    @property
-    def cities(self):
-        """ returns all cities with state_id == State.id """
-        from models import storage
+        __tablename__ = "states"
+        name = Column(String(128), nullable=False)
+        cities = relationship(
+                "City",
+                backref="state",
+                cascade="all, delete")
+    else:
+        name = ""
 
-        list_cities = []
-        for key, obj in storage.all().items():
-            if "City" in key:
-                if obj.state_id == self.id:
-                    list_cities += [obj]
+        @property
+        def cities(self):
+            """ returns all cities with state_id == State.id """
 
-        return list_cities
+            import models
+
+            list_cities = []
+            for key, obj in models.storage.all().items():
+                if "City" in key:
+                    if obj.state_id == self.id:
+                        list_cities += [obj]
+
+            return list_cities

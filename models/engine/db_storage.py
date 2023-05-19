@@ -27,7 +27,7 @@ class DBStorage:
         """ Initialization of engine """
 
         dialect = "mysql"
-        driver = "mysqlconnector"
+        driver = "mysqldb"
         user = os.getenv("HBNB_MYSQL_USER", default="hbnb_dev")
         password = os.getenv("HBNB_MYSQL_PWD", default="hbnb_dev_pwd")
         host = os.getenv("HBNB_MYSQL_HOST", default="localhost")

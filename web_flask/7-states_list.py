@@ -19,7 +19,9 @@ def states_list():
     """ returns all the states in DBstorage """
 
     states = storage.all("State")
-    return render_template("7-states_list.html", states=states)
+    states_dict = {val.id: val.name for val in states.values()}
+
+    return render_template("7-states_list.html", states=states_dict)
 
 
 if __name__ == "__main__":

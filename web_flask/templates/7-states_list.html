@@ -8,8 +8,8 @@
 <BODY>
     <H1>States</H1>
     <UL>
-        {% for key, state in states.items() %}
-        <LI>{{state.id}}: <B>{{state.name}}</B></LI>
+        {% for id, name in states.tems() | dictsort(false, 'state') %}
+        <LI>{{id}}: <B>{{name}}</B></LI>
         {% endfor %}
     </UL>
 </BODY>
