@@ -4,38 +4,37 @@ from flask import Flask, url_for, redirect
 
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route("/")
+@app.route("/", strict_slashes=False)
 def hello_hbnb():
     """ home route configuration """
 
     return "Hello HBNB!"
 
 
-@app.route("/hbnb")
+@app.route("/hbnb", strict_slashes=False)
 def hbnb():
     """ hbnb route configuration """
 
     return "HBNB"
 
 
-@app.route("/c/<text>")
+@app.route("/c/<text>", strict_slashes=False)
 def c_text(text):
     """ c route configuration """
 
     return f"C {text.replace('_', ' ')}"
 
 
-@app.route("/python")
+@app.route("/python", strict_slashes=False)
 def python():
     """ python route configuration """
 
     return redirect(url_for("python_text", text="is_cool"))
 
 
-@app.route("/python/<text>")
+@app.route("/python/<text>", strict_slashes=False)
 def python_text(text):
     """ python route configuration """
 

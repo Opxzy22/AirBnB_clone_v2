@@ -4,46 +4,45 @@ from flask import Flask, render_template
 
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route("/")
+@app.route("/", strict_slashes=False)
 def hello_hbnb():
     """ home route configuration """
 
     return "Hello HBNB!"
 
 
-@app.route("/hbnb")
+@app.route("/hbnb", strict_slashes=False)
 def hbnb():
     """ hbnb route configuration """
 
     return "HBNB"
 
 
-@app.route("/c/<text>")
+@app.route("/c/<text>", strict_slashes=False)
 def c_text(text):
     """ c route configuration """
 
     return f"C {text.replace('_', ' ')}"
 
 
-@app.route("/python")
-@app.route("/python/<text>")
+@app.route("/python", strict_slashes=False)
+@app.route("/python/<text>", strict_slashes=False)
 def python_text(text="is_cool"):
     """ python route configuration """
 
     return f"Python {text.replace('_', ' ')}"
 
 
-@app.route("/number/<int:n>")
+@app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
     """ number route configuration """
 
     return f"{n} is a number"
 
 
-@app.route("/number_template/<int:n>")
+@app.route("/number_template/<int:n>", strict_slashes=False)
 def number_template(n):
     """ number template route configuration """
 

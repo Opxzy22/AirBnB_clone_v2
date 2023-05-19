@@ -3,8 +3,8 @@
 from flask import Flask, render_template
 from models import storage
 
+
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
@@ -14,7 +14,7 @@ def remove(exception):
     storage.close()
 
 
-@app.route("/states_list")
+@app.route("/states_list", strict_slashes=False)
 def states_list():
     """ returns all the states in DBstorage """
 
