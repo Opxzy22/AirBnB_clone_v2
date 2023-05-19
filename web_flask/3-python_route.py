@@ -38,7 +38,7 @@ def python():
 def python_text(text):
     """ python route configuration """
 
-    return f"Python {text.replace('_', ' ')}"
+    return "Python {}".format(text.replace("_", " "))
 
 
 if __name__ == "__main__":
