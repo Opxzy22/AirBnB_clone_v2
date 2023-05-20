@@ -47,16 +47,16 @@ def hbnb():
         "description": place.description,
         "rooms": "{} {}".format(
                                 place.number_rooms,
-                                "rooms" if place.number_rooms > 1 else "room"
+                                "room" if place.number_rooms == 1 else "rooms"
                                 ),
         "bathrooms": "{} {}".format(
                                     place.number_bathrooms,
-                                    "bathrooms" if place.number_bathrooms > 1
-                                    else "bathroom"
+                                    "bathroom" if place.number_bathrooms == 1
+                                    else "bathrooms"
                                     ),
         "guests": "{} {}".format(
                                 place.max_guest,
-                                "guests" if place.max_guest > 1 else "guest"
+                                "guest" if place.max_guest == 1 else "guests"
                                 ),
         "price": place.price_by_night
     } for place in places.values()]
