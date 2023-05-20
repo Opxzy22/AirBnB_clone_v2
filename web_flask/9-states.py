@@ -20,7 +20,15 @@ def states():
 
     states = storage.all("State")
 
-    return render_template("9-states.html", states=states, route="states")
+    states_arr = [
+            {"id": state.id, "name": state.name}
+            for state in states.values()
+    ]
+
+    # Sort the states_arr by each name key
+    states_arr = sorted(states_arr, key=lambda x: x['name'])
+
+    return render_template("9-states.html", states=states_arr, route="states")
 
 
 @app.route("/states/<id>", strict_slashes=False)
@@ -36,7 +44,11 @@ def states_id(id):
             break
 
     if found_state:
-        cities = found_state.cities
+        cities = [
+                {"id": city.id, "name": city.name}
+                for city in found_state.cities
+        ]
+        cities = sorted(cities, key=lambda x: x['name'])
 
     return render_template("9-states.html",
                            state=found_state,

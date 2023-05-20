@@ -44,6 +44,7 @@ class DBStorage:
     def all(self, cls=None):
         """ queries te current db session """
 
+        self.__objects = {}
         if cls is not None:
             if type(cls) is str:
                 cls = eval(cls)

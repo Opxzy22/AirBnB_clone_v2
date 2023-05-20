@@ -24,6 +24,8 @@ class FileStorage:
         if cls is None:
             return FileStorage.__objects
         else:
+            if type(cls) is str:
+                cls = eval(cls)
             mini_dict = {}
             for key, value in FileStorage.__objects.items():
                 if cls.__name__ in key:

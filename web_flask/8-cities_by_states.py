@@ -19,14 +19,19 @@ def cities_by_states():
     """ Gets the cities and states """
 
     states = storage.all("State")
+
     states_arr = []
     for state in states.values():
         state_dict = {}
         state_dict["id"] = state.id
         state_dict["name"] = state.name
-        state_cities = state.cities
-        state_dict["cities"] = state_cities
+        cities = [{"id": city.id, "name": city.name} for city in state.cities]
+
+        # Sort the cities array using name key
+        state_dict["cities"] = sorted(cities, key=lambda x: x["name"])
         states_arr.append(state_dict)
+
+    states_arr = sorted(states_arr, key=lambda x: x["name"])
 
     return render_template("8-cities_by_states.html", states=states_arr)
 
