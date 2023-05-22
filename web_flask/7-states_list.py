@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" This script creates a flash application """
+"""
+    This script creates a flask application for the state_lists route
+"""
 from flask import Flask, render_template
 from models import storage
 

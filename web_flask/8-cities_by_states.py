@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" Starts up a web application server """
+"""
+    This script creates a web application server for route cities_by_states
+"""
 from flask import Flask, render_template
 from models import storage
 

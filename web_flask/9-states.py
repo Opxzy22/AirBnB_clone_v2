@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-""" This module starts a web application server """
+"""
+    This script creates a web application server for routes states
+    and states/<id>
+"""
 from flask import Flask, render_template
 from models import storage
 
