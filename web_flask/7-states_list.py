@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-    This script creates a flask application for the state_lists route
-"""
+""" This script configures the route for states_list """
 from flask import Flask, render_template
 from models import storage
 
@@ -11,7 +9,7 @@ app = Flask(__name__)
 
 @app.teardown_appcontext
 def remove(exception):
-    """ removes the current session """
+    """ removes the current storage session """
 
     storage.close()
 
