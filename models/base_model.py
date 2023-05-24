@@ -6,8 +6,12 @@ import os
 import uuid
 import models
 from datetime import datetime
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DateTime, Integer
+
+try:
+    from sqlalchemy.ext.declarative import declarative_base
+except Exception:
+    from sqlalchemy.orm import declarative_base
 
 if os.getenv('HBNB_TYPE_STORAGE') == 'db':
     Base = declarative_base()
