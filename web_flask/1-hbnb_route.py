@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+""" import Flask module from flask
+python script that start web application
+it listen on 0.0.0.0 to port 5000
+"""
 from flask import Flask
 
 app = Flask(__name__)
