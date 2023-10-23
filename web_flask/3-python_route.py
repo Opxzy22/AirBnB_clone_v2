@@ -4,7 +4,6 @@ a script that start a web application
 to listen 0.0.0.0 to port 5000
 """
 from flask import Flask
-
 app = Flask(__name__)
 
 
@@ -26,7 +25,6 @@ def display_text(text):
 @app.route("/python", strict_slashes=False)
 @app.route("/python/(<text>)", strict_slashes=False)
 def display_python(text="is cool"):
-"""display Python, followed by the value of the text variable"""
     return "Python {}" .format(text.replace('_', ' '))
 
 
