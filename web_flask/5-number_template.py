@@ -2,7 +2,7 @@
 """start a flask web apllication
 that listen to 0.0.0.0 on port 5000
 """
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
